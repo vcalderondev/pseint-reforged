@@ -32,7 +32,9 @@ mxVarWindow::mxVarWindow(wxWindow *parent):wxPanel(parent,wxID_ANY,wxDefaultPosi
 	wxSizer *sizer=new wxBoxSizer(wxVERTICAL);
 	tree = new wxTreeCtrl(this,wxID_ANY,wxDefaultPosition,wxSize(150,50),wxTR_FULL_ROW_HIGHLIGHT|wxTR_NO_LINES|wxTR_HIDE_ROOT|wxTR_SINGLE|wxTR_NO_BUTTONS/*|wxTR_ROW_LINES*/);
 	
-	wxArrayString img_files(LV_MAX+2,""); // +2 por proc y sub
+	wxArrayString img_files;
+	for (int i=0; i<LV_MAX+2; i++) img_files.Add("");
+
 	// tipos conocidos
 	img_files[             LV_LOGICA                        ] = "log.png";
 	img_files[LV_DEFINIDA| LV_LOGICA                        ] = "log_def.png";
@@ -48,7 +50,7 @@ mxVarWindow::mxVarWindow(wxWindow *parent):wxPanel(parent,wxID_ANY,wxDefaultPosi
 	img_files[             LV_LOGICA|            LV_CARACTER] = "log_car.png";
 	img_files[                       LV_NUMERICA|LV_CARACTER] = "car_num.png";
 	
-	// tipos imposibles (error del intérprete)
+	// tipos imposibles (error del intÃ©rprete)
 	img_files[LV_DEFINIDA                                   ] = "error.png";
 	img_files[LV_DEFINIDA| LV_LOGICA|LV_NUMERICA            ] = "error.png";
 	img_files[LV_DEFINIDA| LV_LOGICA            |LV_CARACTER] = "error.png";
@@ -65,7 +67,7 @@ mxVarWindow::mxVarWindow(wxWindow *parent):wxPanel(parent,wxID_ANY,wxDefaultPosi
 		imglist->Add(wxBitmap(DIR_PLUS_FILE_3(config->images_path,"vars",config->big_icons?"24":"16",img_files[i]),wxBITMAP_TYPE_PNG));
 	tree->AssignImageList(imglist);
 	tree_root=tree_current=tree->AddRoot("");
-	tree->SetToolTip(tooltip=utils->FixTooltip(_Z("En esta sección se listan las variables que utiliza un algoritmo. El ícono a la izquierda del nombre indica los potenciales tipos de datos que determina el intérprete en caso de que el tipo de variable pueda deducirse antes de ejecutar el algoritmo. Puede seleccionar una para resaltarla en el pseudocódigo.")));
+	tree->SetToolTip(tooltip=utils->FixTooltip(_Z("En esta secciÃ³n se listan las variables que utiliza un algoritmo. El Ã­cono a la izquierda del nombre indica los potenciales tipos de datos que determina el intÃ©rprete en caso de que el tipo de variable pueda deducirse antes de ejecutar el algoritmo. Puede seleccionar una para resaltarla en el pseudocÃ³digo.")));
 	sizer->Add(tree,wxSizerFlags().Proportion(1).Expand());
 	SetSizer(sizer);
 }

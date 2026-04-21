@@ -11,7 +11,7 @@ mxBacktrace::mxBacktrace(wxWindow *parent)
 {
 	wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 	m_html = new wxHtmlWindow(this,wxID_ANY,wxDefaultPosition,wxSize(50,50));
-	m_html->SetToolTip(utils->FixTooltip( _Z("Aquí se muestra el encadenamiento de llamadas entre el proceso/algoritmo principal y los diferentes subprocesos/funciones, para saber cómo se llegó al punto actual de la ejecución, y qué funciones quedaron pausadas a la espera de la finalización de la función actual.")));
+	m_html->SetToolTip(utils->FixTooltip( _Z("AquÃ­ se muestra el encadenamiento de llamadas entre el proceso/algoritmo principal y los diferentes subprocesos/funciones, para saber cÃ³mo se llegÃ³ al punto actual de la ejecuciÃ³n, y quÃ© funciones quedaron pausadas a la espera de la finalizaciÃ³n de la funciÃ³n actual.")));
 	SetText();
 	sizer->Add(m_html,wxSizerFlags().Expand().Proportion(1));
 	SetSizerAndFit(sizer);
@@ -78,7 +78,8 @@ void mxBacktrace::SetText ( ) {
 			else text += _T("&nbsp;<FONT size=\"+1\">\u21d2</FONT>&nbsp;");
 		}
 		text += m_procs[i].first;
-		if (i+1<m_procs.size()) text += _T(" (\u23f8 linea ") + std::to_string(m_procs[i].second) + ")";
+		if (i+1<m_procs.size()) text += wxString::Format(_T(" (\u23f8 linea %i)"), m_procs[i].second);
+
 		else text += m_about_to_pop ? _T(" ( \u2716 )") : _T(" (\u23f5)");
 		text += "</FONT>";
 		

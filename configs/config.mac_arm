@@ -1,0 +1,21 @@
+ARCH=mac_arm
+TEMP=temp/mac_arm_release
+BIN=bin
+EXT=
+MACOS=1
+
+RM=rm -f
+MKDIR=mkdir -p
+
+GCC=gcc
+GPP=g++
+AR=ar
+
+CFLAGS=-O3 -DNDEBUG -arch arm64
+CXXFLAGS=-O3 -DNDEBUG -std=c++17 -arch arm64 -Wno-invalid-source-encoding -Wno-inconsistent-missing-override
+LDFLAGS=-arch arm64 -Wl,-headerpad_max_install_names
+
+WX_CXXFLAGS=`wx-config --cppflags` -DWX3
+WX_LDFLAGS=`wx-config --libs std,stc,aui`
+
+GL_LDFLAGS=`wx-config --libs gl` -framework OpenGL
